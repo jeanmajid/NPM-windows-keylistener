@@ -1,0 +1,14 @@
+{
+  "name": "keylistener",
+  "version": "1.0.0",
+  "main": "./build/Release/keylistener.node",
+  "types": "./keylistener.d.ts",
+  "keywords": [],
+  "author": "jeanmajid",
+  "license": "ISC",
+  "gypfile": true,
+  "description": "",
+  "dependencies": {
+    "nan": "^2.22.0"
+  }
+}
