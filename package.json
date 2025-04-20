@@ -25,6 +25,7 @@
     "index.mjs",
     "index.d.ts",
     "build/Release/*.node",
+    "binding.gyp",
     "README.md"
   ],
   "gypfile": true,
