@@ -11,6 +11,7 @@
   },
   "main": "./index.cjs",
   "module": "./index.mjs",
+  "license": "MIT",
   "types": "./keylistener.d.ts",
   "exports": {
     ".": {
@@ -23,7 +24,8 @@
     "index.cjs",
     "index.mjs",
     "index.d.ts",
-    "build/Release/*.node"
+    "build/Release/*.node",
+    "README.md"
   ],
   "gypfile": true,
   "dependencies": {
