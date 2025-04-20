@@ -1,6 +1,6 @@
 # @jeanmajid/windows-keylistener
 
-Low‑level global keyboard hook for Windows. Very basic
+A very basic Low‑level keyboard hook for Windows, with some additional functionality (currently only copyToClipboard)
 
 ## Installation
 
@@ -13,26 +13,26 @@ npm install @jeanmajid/windows-keylistener
 CommonJS (Node.js):
 
 ```javascript
-const keylistener = require('@jeanmajid/windows-keylistener');
+const keylistener = require("@jeanmajid/windows-keylistener");
 
 keylistener.start((keyCode) => {
-    console.log('Key pressed:', keyCode);
+    console.log("Key pressed:", keyCode);
 });
 
 // later...
 keylistener.stop();
 
 // copy a string to clipboard:
-keylistener.copyToClipboard('Hello from clipboard');
+keylistener.copyToClipboard("Hello from clipboard");
 ```
 
 ESM:
 
 ```javascript
-import keylistener from '@jeanmajid/windows-keylistener';
+import keylistener from "@jeanmajid/windows-keylistener";
 
 keylistener.start((keyCode) => {
-  console.log('Key pressed:', keyCode);
+  console.log("Key pressed:", keyCode);
 });
 ```
 
