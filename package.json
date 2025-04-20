@@ -1,7 +1,14 @@
 {
   "name": "@jeanmajid/windows-keylistener",
   "version": "1.0.0",
-  "description": "Low‑level keyboard hook for Windows (Node.js)",
+  "description": "Low‑level keyboard hook for Windows",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeanmajid/NPM-windows-keylistener"
+  },
+  "bugs": {
+    "url": "https://github.com/jeanmajid/NPM-windows-keylistener/issues"
+  },
   "main": "./index.cjs",
   "module": "./index.mjs",
   "types": "./keylistener.d.ts",
