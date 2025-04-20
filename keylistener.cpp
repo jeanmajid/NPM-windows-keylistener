@@ -87,10 +87,39 @@ NAN_METHOD(stop)
     callback.Reset();
 }
 
+NAN_METHOD(copyToClipboard)
+{
+    if (info.Length() < 1 || !info[0]->IsString())
+    {
+        Nan::ThrowTypeError("String required");
+        return;
+    }
+
+    v8::Isolate* isolate = info.GetIsolate();
+    v8::Local<v8::Context> context = isolate->GetCurrentContext();
+    v8::String::Utf8Value str(isolate, info[0]->ToString(context).ToLocalChecked());
+    const char* input = *str;
+
+    if (OpenClipboard(NULL))
+    {
+        EmptyClipboard();
+
+        HGLOBAL hClipboardData = GlobalAlloc(GMEM_DDESHARE, strlen(input) + 1);
+        char* pchData = (char*)GlobalLock(hClipboardData);
+        strcpy(pchData, input);
+        GlobalUnlock(hClipboardData);
+
+        SetClipboardData(CF_TEXT, hClipboardData);
+
+        CloseClipboard();
+    }
+}
+
 NAN_MODULE_INIT(Init)
 {
     NAN_EXPORT(target, start);
     NAN_EXPORT(target, stop);
+    NAN_EXPORT(target, copyToClipboard);
 }
 
-NODE_MODULE(keyboard, Init)
+NODE_MODULE(keyListener, Init)

@@ -1,13 +1,24 @@
 {
-  "name": "keylistener",
+  "name": "@jeanmajid/windows-keylistener",
   "version": "1.0.0",
-  "main": "./build/Release/keylistener.node",
+  "description": "Low‑level keyboard hook for Windows (Node.js)",
+  "main": "./index.cjs",
+  "module": "./index.mjs",
   "types": "./keylistener.d.ts",
-  "keywords": [],
-  "author": "jeanmajid",
-  "license": "ISC",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs",
+      "types": "./keylistener.d.ts"
+    }
+  },
+  "files": [
+    "index.cjs",
+    "index.mjs",
+    "index.d.ts",
+    "build/Release/*.node"
+  ],
   "gypfile": true,
-  "description": "",
   "dependencies": {
     "nan": "^2.22.0"
   }
