@@ -24,6 +24,7 @@
     "index.cjs",
     "index.mjs",
     "index.d.ts",
+    "keylistener.cpp",
     "binding.gyp",
     "README.md"
   ],
