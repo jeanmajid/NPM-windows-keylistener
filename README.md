@@ -1,6 +1,6 @@
 # @jeanmajid/windows-keylistener
 
-Low‑level global keyboard hook for Windows.
+Low‑level global keyboard hook for Windows. Very basic
 
 ## Installation
 
@@ -14,8 +14,6 @@ CommonJS (Node.js):
 
 ```javascript
 const keylistener = require('@jeanmajid/windows-keylistener');
-// or directly:
-// const keylistener = require('./build/Release/keylistener.node');
 
 keylistener.start((keyCode) => {
     console.log('Key pressed:', keyCode);
@@ -53,4 +51,4 @@ Type definitions are in keylistener.d.ts.
 
 ## License
 
-MIT © 2025 Jean Majid
+MIT © 2025 jeanmajid
