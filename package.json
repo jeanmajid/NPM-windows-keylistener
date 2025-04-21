@@ -31,5 +31,21 @@
   "gypfile": true,
   "dependencies": {
     "nan": "^2.22.0"
-  }
+  },
+  "keywords": [
+    "keylistener",
+    "keyboard",
+    "windows",
+    "native",
+    "clipboard",
+    "hook",
+    "low-level",
+    "win32",
+    "addon",
+    "node-gyp",
+    "event",
+    "input",
+    "listener",
+    "hotkey"
+  ]
 }
