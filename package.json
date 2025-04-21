@@ -1,6 +1,6 @@
 {
   "name": "@jeanmajid/windows-keylistener",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Low‑level keyboard hook for Windows",
   "repository": {
     "type": "git",
