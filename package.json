@@ -14,8 +14,7 @@
     "license": "MIT",
     "types": "./keylistener.d.ts",
     "scripts": {
-        "prepare": "prebuildify --napi --strip",
-        "install": "prebuild-install --fallback-to-build"
+        "build": "node-gyp rebuild"
     },
     "exports": {
         ".": {
@@ -30,13 +29,11 @@
         "keylistener.d.ts",
         "keylistener.cpp",
         "binding.gyp",
-        "README.md",
-        "prebuilds"
+        "README.md"
     ],
     "gypfile": true,
     "dependencies": {
-        "nan": "^2.22.0",
-        "prebuild-install": "^7.1.3"
+        "nan": "^2.22.0"
     },
     "keywords": [
         "keylistener",
@@ -53,8 +50,5 @@
         "input",
         "listener",
         "hotkey"
-    ],
-    "devDependencies": {
-        "prebuildify": "^6.0.1"
-    }
+    ]
 }
