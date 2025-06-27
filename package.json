@@ -14,8 +14,8 @@
     "license": "MIT",
     "types": "./keylistener.d.ts",
     "scripts": {
-        "prepare": "prebuildify --napi",
-        "install": "prebuild-install; node-gyp rebuild"
+        "prepare": "prebuildify --napi --strip",
+        "install": "prebuild-install --fallback-to-build"
     },
     "exports": {
         ".": {
