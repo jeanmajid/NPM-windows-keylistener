@@ -5,17 +5,22 @@
 #include <queue>
 #include <mutex>
 
+struct KeyEvent {
+    uint32_t keyCode;
+    bool isPressed;
+};
+
 std::atomic<bool> running(true);
 Nan::Persistent<v8::Function> callback;
 std::mutex mtx;
-std::queue<uint32_t> keyQueue;
+std::queue<KeyEvent> keyQueue;
 uv_async_t async;
 
 void SendKey(uv_async_t *handle)
 {
     Nan::HandleScope scope;
 
-    std::queue<uint32_t> localQueue;
+    std::queue<KeyEvent> localQueue;
 
     {
         std::lock_guard<std::mutex> lock(mtx);
@@ -24,12 +29,14 @@ void SendKey(uv_async_t *handle)
 
     while (!localQueue.empty())
     {
-        uint32_t keyCode = localQueue.front();
+        KeyEvent keyEvent = localQueue.front();
         localQueue.pop();
 
         v8::Local<v8::Value> argv[] = {
-            Nan::New<v8::Uint32>(keyCode)};
-        Nan::MakeCallback(Nan::GetCurrentContext()->Global(), Nan::New(callback), 1, argv);
+            Nan::New<v8::Uint32>(keyEvent.keyCode),
+            Nan::New<v8::Boolean>(keyEvent.isPressed)
+        };
+        Nan::MakeCallback(Nan::GetCurrentContext()->Global(), Nan::New(callback), 2, argv);
     }
 }
 
@@ -38,14 +45,28 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
     if (nCode == HC_ACTION)
     {
         KBDLLHOOKSTRUCT *p = (KBDLLHOOKSTRUCT *)lParam;
+        
+        KeyEvent keyEvent;
+        keyEvent.keyCode = static_cast<uint32_t>(p->vkCode);
+        
         if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)
         {
-            {
-                std::lock_guard<std::mutex> lock(mtx);
-                keyQueue.push(static_cast<uint32_t>(p->vkCode));
-            }
-            uv_async_send(&async);
+            keyEvent.isPressed = true;
         }
+        else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP)
+        {
+            keyEvent.isPressed = false;
+        }
+        else
+        {
+            return CallNextHookEx(NULL, nCode, wParam, lParam);
+        }
+
+        {
+            std::lock_guard<std::mutex> lock(mtx);
+            keyQueue.push(keyEvent);
+        }
+        uv_async_send(&async);
     }
     return CallNextHookEx(NULL, nCode, wParam, lParam);
 }

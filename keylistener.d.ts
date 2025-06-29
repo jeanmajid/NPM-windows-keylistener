@@ -1,9 +1,9 @@
 declare module "@jeanmajid/windows-keylistener" {
     /**
      * Starts the key listener.
-     * @param callback - A function that will be called with the key code of each key press.
+     * @param callback - A function that will be called with the key code and state of each key event.
      */
-    export function start(callback: (keyCode: number) => void): void;
+    export function start(callback: (keyCode: number, isPressed: boolean) => void): void;
 
     /**
      * Stops the key listener.
